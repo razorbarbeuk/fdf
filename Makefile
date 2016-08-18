@@ -6,19 +6,19 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 14:48:45 by gbourson          #+#    #+#              #
-#    Updated: 2016/08/17 17:03:59 by gbourson         ###   ########.fr        #
+#    Updated: 2016/08/18 11:50:44 by RAZOR            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		=	fdf
 LIB			=	./libft/libft.a
-LIBMLX		=	./minilibx_macos/libmlx.a
-SRC_NAME 	=	main.c
+SRC_NAME 	=	main.c \
+				list_utils.c
 
 SRC			=	$(addprefix srcs/, $(SRC_NAME))
 INCLUDES	=	-I./libft/includes/ -I./includes
 OBJ			=	$(SRC:.c=.o)
-CFLAGS		=	-g -Werror -Wall -Wextra -framework OpenGL -framework Appkit
+CFLAGS		=	-g -Werror -Wall -Wextra
 
 all : $(NAME)
 
@@ -27,7 +27,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	@make -C libft
-	@gcc $(CFLAGS) $(OBJ) $(LIB) $(LIBMLX) $(INCLUDES) -o $(NAME)
+	@gcc $(CFLAGS) $(OBJ) $(LIB) $(INCLUDES) -o $(NAME) -L/usr/X11/lib -lX11 -lmlx -lXext -framework OpenGL -framework AppKit
 	@echo "Tu as compilé"
 
 clean :
@@ -43,3 +43,4 @@ fclean : clean
 re : 	fclean all
 
 .PHONY: all, clean, fclean, re
+# @gcc $(CFLAGS) $(OBJ) $(LIB) $(INCLUDES) -o $(NAME) -lmlx -framework OpenGL -framework AppKit
