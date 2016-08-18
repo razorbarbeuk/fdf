@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_utils.c                                       :+:      :+:    :+:   */
+/*   err.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/18 11:46:07 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/08/18 17:23:16 by gbourson         ###   ########.fr       */
+/*   Created: 2016/08/18 15:04:50 by gbourson          #+#    #+#             */
+/*   Updated: 2016/08/18 15:05:28 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-void	ft_lstadd_back(t_list **alst, t_list *new)
+void	print_err(char *str)
 {
-	t_list *tmp;
-
-	tmp = *alst;
-	if (tmp == NULL)
-		*alst = new;
-	else if (tmp)
-	{
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-	}
+	ft_putstr_fd(RED, 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("\e[0m", 2);
 }

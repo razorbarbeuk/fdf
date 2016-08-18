@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2016/08/18 12:21:57 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/08/18 15:52:44 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,15 @@ typedef struct		s_env
 {
 	void			*mlx_ptr;
 	void			*mlx_win;
-	t_list			list_line;
-	t_list			map;
+	t_list			*list_line;
+	t_list			*map;
 }					t_env;
 
 /*List_utils*/
 void	ft_lstadd_back(t_list **alst, t_list *new);
 
+/*err*/
+void	print_err(char *str);
 
 
 #endif
