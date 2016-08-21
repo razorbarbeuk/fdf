@@ -6,56 +6,80 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 14:10:35 by gbourson          #+#    #+#             */
-/*   Updated: 2016/08/18 17:53:14 by gbourson         ###   ########.fr       */
+/*   Updated: 2016/08/21 23:36:37 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-int ft_init_list(t_list **lst)
-{
-	t_list *tmp;
-
-	tmp = NULL;
-	tmp = *lst;
-	if ((tmp = (t_list *)malloc(sizeof(t_list))) == NULL)
-		return (0);
-	*lst = tmp;
-	return (1);
-}
-
-// t_list	*ft_create_map(t_list **map)
-// {
-// 	t_list *tmp_map;
-//
-// 	tmp_map = NULL;
-// 	tmp_map = *map;
-// 	if (tmp_map)
-// 	{
-// 		ft_lstadd_back(map, ft_lstnew(list_line, sizeof(t_list)));
-// 		return (map);
-// 	}
-// 	else
-// 		return (NULL);
-// }
-
-void ft_print_list(t_list **lst)
+void ft_print_list(t_list **map)
 {
 	t_point	*point;
 	t_list	*tmp;
+	t_list	*tmp_list;
 
 	point = NULL;
 	tmp = NULL;
-	tmp = *lst;
+	tmp_list = NULL;
+	tmp = *map;
 	while (tmp)
 	{
-		ft_putstr("ddd\n");
-		point = ((t_point *)tmp->content);
-		// ft_putnbr(point->x);
-		// ft_putnbr(point->y);
-		//ft_putnbr(point->z);
+
+		tmp_list = (t_list *)tmp->content;
+		while (tmp_list)
+		{
+			point = (t_point *)tmp_list->content;
+			//ft_putnbr(point->x);
+			// ft_putnbr(point->y);
+			if (ft_count_number(point->z) < 2)
+			{
+				ft_putchar(' ');
+				ft_putchar(' ');
+			}
+			else
+				ft_putchar(' ');
+			ft_putnbr(point->z);
+			point = NULL;
+			tmp_list = tmp_list->next;
+
+		}
+		tmp_list = NULL;
+		point = NULL;
 		tmp = tmp->next;
+		ft_putchar('\n');
 	}
+	tmp = NULL;
+	ft_putendl("END");
+}
+
+int	ft_create_map(t_list **map, t_list *list_line)
+{
+	t_list *tmp_map;
+
+	tmp_map = NULL;
+	tmp_map = *map;
+	if (list_line)
+	{
+		ft_lstadd_back(&tmp_map, ft_lstnew(list_line, sizeof(t_list)));
+		*map = tmp_map;
+		tmp_map = NULL;
+		return (1);
+	}
+	else
+		return (0);
+}
+
+void ft_init_point(t_point **pts)
+{
+	t_point *tmp;
+
+	tmp = NULL;
+	tmp = *pts;
+
+	tmp->x = 0;
+	tmp->y = 0;
+	tmp->z = 0;
+	*pts = tmp;
 }
 
 int ft_parse_line(char *line, int count_line, t_list **list_line)
@@ -68,9 +92,12 @@ int ft_parse_line(char *line, int count_line, t_list **list_line)
 	tmp = *list_line;
 	point = NULL;
 	i = 0;
-	while (line[i] == '\n')
+	while (line[i])
 	{
+		if (line[i] == ' ')
+			i++;
 		point = (t_point *)malloc(sizeof(t_point));
+		ft_init_point(&point);
 		point->x = i;
 		point->y = count_line;
 		point->z = ft_atoi(&line[i]);
@@ -79,6 +106,7 @@ int ft_parse_line(char *line, int count_line, t_list **list_line)
 		i++;
 	}
 	*list_line = tmp;
+	tmp = NULL;
 	return (1);
 }
 
@@ -88,20 +116,14 @@ int ft_open_file(char *av, t_env *data)
 	char *line;
 	int	 count_line;
 
-	(void)data;
+	fd = 0;
 	line = NULL;
 	count_line = 0;
 	fd = open(av, O_RDONLY);
-
-	ft_init_list(&data->map);
 	while (get_next_line(fd, &line))
 	{
-		ft_init_list(&data->list_line);
-		if (ft_parse_line(line, count_line, &data->list_line))
-		{
-			ft_print_list(&data->list_line);
-			//data->map = ft_create_map(data->list_line);
-		}
+		if (line && ft_parse_line(line, count_line, &data->list_line))
+			ft_create_map(&data->map, data->list_line);
 		else
 		{
 			print_err("List fault");
@@ -109,9 +131,9 @@ int ft_open_file(char *av, t_env *data)
 		}
 		ft_memdel((void **)&data->list_line);
 		ft_strdel(&line);
-		print_err("HEllO");
 		count_line++;
 	}
+	ft_strdel(&line);
 	return (1);
 }
 
@@ -141,6 +163,7 @@ int main(int ac, char **av, char **env)
 	if ((env) && (ac < 3))
 	{
 		ft_open_file(av[1], &data);
+		ft_print_list(&data.map);
 		if (!ft_mlx_init(&data))
 			return (0);
 	    mlx_loop(data.mlx_ptr);

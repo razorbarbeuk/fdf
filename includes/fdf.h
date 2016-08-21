@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2016/08/18 15:52:44 by gbourson         ###   ########.fr       */
+/*   Updated: 2016/08/21 20:13:37 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct		s_env
 
 /*List_utils*/
 void	ft_lstadd_back(t_list **alst, t_list *new);
+void	ft_free_list(void *tmp, size_t tmp_size);
 
 /*err*/
 void	print_err(char *str);
