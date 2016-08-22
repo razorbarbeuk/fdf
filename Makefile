@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 14:48:45 by gbourson          #+#    #+#              #
-#    Updated: 2016/08/18 19:37:52 by RAZOR            ###   ########.fr        #
+#    Updated: 2016/08/22 11:16:19 by gbourson         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,8 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	@make -C libft
-	@gcc $(CFLAGS) $(OBJ) $(LIB) $(INCLUDES) -o $(NAME) -L/usr/X11/lib -lX11 -lmlx -lXext -framework OpenGL -framework AppKit
-	# @gcc $(CFLAGS) $(OBJ) $(LIB) $(INCLUDES) -o $(NAME) -lmlx -framework OpenGL -framework AppKit
+	# @gcc $(CFLAGS) $(OBJ) $(LIB) $(INCLUDES) -o $(NAME) -L/usr/X11/lib -lX11 -lmlx -lXext -framework OpenGL -framework AppKit
+	@gcc $(CFLAGS) $(OBJ) $(LIB) $(INCLUDES) -o $(NAME) -lmlx -framework OpenGL -framework AppKit
 	@echo "Tu as compilé"
 
 clean :

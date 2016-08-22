@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/18 11:46:07 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/08/21 23:12:38 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/08/22 11:31:39 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,46 @@ void ft_print_list_kk(t_list **lst)
 		tmp = tmp->next;
 	}
 	ft_putendl("END LST");
+}
+
+void ft_print_list(t_list **map)
+{
+	t_point	*point;
+	t_list	*tmp;
+	t_list	*tmp_list;
+
+	point = NULL;
+	tmp = NULL;
+	tmp_list = NULL;
+	tmp = *map;
+	while (tmp)
+	{
+
+		tmp_list = (t_list *)tmp->content;
+		while (tmp_list)
+		{
+			point = (t_point *)tmp_list->content;
+			//ft_putnbr(point->x);
+			// ft_putnbr(point->y);
+			if (ft_count_number(point->z) < 2)
+			{
+				ft_putchar(' ');
+				ft_putchar(' ');
+			}
+			else
+				ft_putchar(' ');
+			ft_putnbr(point->z);
+			point = NULL;
+			tmp_list = tmp_list->next;
+
+		}
+		tmp_list = NULL;
+		point = NULL;
+		tmp = tmp->next;
+		ft_putchar('\n');
+	}
+	tmp = NULL;
+	ft_putendl("END");
 }
 // void ft_free_list(t_list **lst)
 // {
