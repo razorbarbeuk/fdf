@@ -6,69 +6,62 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 14:10:35 by gbourson          #+#    #+#             */
-/*   Updated: 2016/08/22 17:16:50 by gbourson         ###   ########.fr       */
+/*   Updated: 2016/08/24 21:10:01 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
+int ft_center_map(t_list *map, int *top, int *left)
+{
+	t_list	*tmp;
+	t_point	*point;
+	while (map->next)
+		map = map->next;
+	tmp = (t_list *)map->content;
+	while (tmp->next)
+		tmp = tmp->next;
+	point = (t_point *)tmp->content;
+	(*left) = (WIN_W + point->x)/2;
+	(*top) = (WIN_H + point->y)/2;
+	// ft_putnbr((point->x));
+	// ft_putchar(' ');
+	// ft_putnbr((point->y));
+	return (0);
+}
+
 void ft_draw_pixel(t_env *data)
 {
-	t_point	*point_x;
-	t_point	*point_y;
-	t_list	*tmp;
+	t_point	*point;
 	t_list	*tmp_list;
 	int		screen_x;
 	int		screen_y;
-	int		cursor_x;
-	int		cursor_y;
 
-	point_x = NULL;
-	point_y = NULL;
-	tmp = NULL;
+	point = NULL;
 	tmp_list = NULL;
-	tmp = data->map;
+	ft_center_map(data->map, &data->top, &data->left);
 	screen_x = 0;
 	screen_y = 0;
-	cursor_x = 0;
-	cursor_y = 0;
-	while (tmp)
+	while (data->map)
 	{
-		tmp_list = (t_list *)tmp->content;
-		point_y = (t_point *)tmp_list->content;
+		tmp_list = data->map->content;
 		while (tmp_list)
 		{
-			cursor_x = 0;
-			point_x = (t_point *)tmp_list->content;
-			screen_x = point_x->x * SIZE_CASE;
+			point = (t_point *)tmp_list->content;
+			// screen_x = ((point->x - point->y) * SIZE_CASE) + data->left;
+			// screen_y = ((point->x + point->y) * (SIZE_CASE/2)) + data->top;
+			screen_x = ((point->x - point->y) * SIZE_CASE);
+			screen_y = ((point->x + point->y) * (SIZE_CASE/2));
+			mlx_pixel_put(data->mlx_ptr, data->mlx_win, screen_x, screen_y, 0x00FFCB0D);
 			ft_putnbr(screen_x);
+			ft_putchar(':');
+			ft_putnbr(screen_y);
 			ft_putchar(' ');
-			while (cursor_y < screen_y)
-			{
-					mlx_pixel_put(data->mlx_ptr, data->mlx_win, screen_x, cursor_y, 0x00FFFFFF);
-					cursor_y++;
-			}
-			while (cursor_x < screen_x)
-			{
-					cursor_y = 0;
-					mlx_pixel_put(data->mlx_ptr, data->mlx_win, cursor_x, screen_y, 0x00FFFFFF);
-					if (cursor_x == (screen_x - 1))
-					{
-						while (cursor_y < screen_y)
-						{
-								mlx_pixel_put(data->mlx_ptr, data->mlx_win, screen_x, cursor_y, 0x00FFFFFF);
-								cursor_y++;
-						}
-					}
-					cursor_x++;
-			}
 			tmp_list = tmp_list->next;
 		}
-		screen_y = point_y->y * SIZE_CASE;
-		// ft_putnbr(screen_y);
 		ft_putchar('\n');
 		tmp_list = NULL;
-		tmp = tmp->next;
+		data->map = data->map->next;
 	}
 }
 
@@ -166,7 +159,7 @@ int ft_mlx_init(t_env *data)
 {
 	if ((data->mlx_ptr = mlx_init()) == NULL)
         return (0);
-    if ((data->mlx_win = mlx_new_window(data->mlx_ptr, 800, 600, "Hello world")) == NULL)
+    if ((data->mlx_win = mlx_new_window(data->mlx_ptr, WIN_W, WIN_H, "Hello world")) == NULL)
         return (0);
 	return (1);
 }
