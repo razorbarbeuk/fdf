@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2016/08/24 18:57:37 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/08/25 15:01:08 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct		s_env
 
 /*List_utils*/
 void	ft_lstadd_back(t_list **alst, t_list *new);
+void	ft_lstiter_coord(t_list *lst, int *num, int opt, void (*f)(t_list *elem, int *num, int opt));
+void	ft_elem_num(t_list *elem, int *num, int opt);
 
 /*err*/
 void	print_err(char *str);
