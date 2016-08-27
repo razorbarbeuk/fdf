@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   err.c                                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/18 15:04:50 by gbourson          #+#    #+#             */
-/*   Updated: 2016/08/27 12:32:01 by RAZOR            ###   ########.fr       */
+/*   Created: 2016/08/27 12:58:29 by RAZOR             #+#    #+#             */
+/*   Updated: 2016/08/27 12:59:07 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-void	print_err(char *str)
+void ft_init_tab_int(int *tab, size_t c)
 {
-	ft_putstr_fd(RED, 2);
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd("\e[0m", 2);
+	int i;
+
+	i = 0;
+	while ((size_t)i != c)
+	{
+		tab[i] = 0;
+		i++;
+	}
 }

@@ -6,15 +6,18 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 14:48:45 by gbourson          #+#    #+#              #
-#    Updated: 2016/08/22 19:09:01 by RAZOR            ###   ########.fr        #
+#    Updated: 2016/08/27 14:12:25 by RAZOR            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		=	fdf
 LIB			=	./libft/libft.a
 SRC_NAME 	=	main.c \
+				parse_line_lst_create.c \
 				list_utils.c \
-				err.c
+				get_center_map.c \
+				err.c \
+				utils.c
 
 SRC			=	$(addprefix srcs/, $(SRC_NAME))
 INCLUDES	=	-I./libft/includes/ -I./includes

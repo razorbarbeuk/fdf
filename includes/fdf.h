@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2016/08/25 15:01:08 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/08/27 14:10:45 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,14 @@ typedef struct		s_env
 	void			*mlx_win;
 	int				top;
 	int				left;
-	int				map_height;
-	int				map_width;
+	int				case_width;
+	int				case_height;
 	t_list			*list_line;
 	t_list			*map;
 }					t_env;
+
+/*Parsing line*/
+int ft_open_file(char *av, t_env *data);
 
 /*List_utils*/
 void	ft_lstadd_back(t_list **alst, t_list *new);
@@ -61,11 +64,12 @@ void	ft_elem_num(t_list *elem, int *num, int opt);
 void	print_err(char *str);
 
 /*utils*/
-void ft_init_tab_int(int *tab);
+void ft_init_tab_int(int *tab, size_t c);
 
 /*Print utils*/
 void ft_print_list(t_list **map);
 
-
+/*get_center_map*/
+int ft_center_map(t_list *map, int *top, int *left);
 
 #endif

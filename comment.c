@@ -131,3 +131,58 @@ void ft_print_list(t_list **map)
 // 	tab[0] -= 2;
 // 	tab[1]++;
 // }
+
+// ft_elem_num(tmp_list, &screen_x, 1);
+// ft_elem_num(tmp_list, &screen_y, 2);
+// ft_elem_num(tmp_list_next, &screen_x_next, 1);
+// ft_elem_num(tmp_list_next, &screen_y_next, 2);
+//screen_y = point->y * SIZE_CASE;
+//disth = ((point_next->y + data->top) - (point->y + data->top)) * SIZE_CASE;
+
+// screen_x = (point->x * SIZE_CASE) + data->left;
+// screen_x_next = (point_next->x * SIZE_CASE) + data->left;
+
+// screen_y = (point->y * SIZE_CASE) + data->top;
+// screen_y_next = (point_next->y * SIZE_CASE) + data->top;
+
+// ft_putnbr(point->y + data->top);
+// ft_putchar(':');
+// ft_putnbr(point_next->y + data->top);
+// ft_putchar(' ');
+//distl = ((screen_x_next + data->left) - (screen_x + data->left));
+
+//disth = ((point->x * SIZE_CASE) - (point_next->x * SIZE_CASE));
+
+
+// ft_putnbr(distl);
+// ft_putchar(':');
+// ft_putnbr(disth);
+// ft_putchar(' ');
+//point_next = (t_point *)tmp_list->next->content;
+// tab[0] = point->x + data->left;
+// tab[1] = point->y + data->top;
+// screen_x = point->x * SIZE_CASE;
+// screen_y = point->y * SIZE_CASE;
+// tab[0] = point->x + data->left;
+// tab[1] = point->y + data->top;
+// screen_x = point->x * SIZE_CASE;
+// screen_y = point->y * SIZE_CASE;
+
+// ft_putnbr(point_next->x + data->left);
+// ft_putchar(':');
+// ft_putnbr(point_next->y + data->left);
+// ft_putchar(' ');
+
+
+// while (tab[0] < (screen_x + data->left))
+// {
+// 	mlx_pixel_put(data->mlx_ptr, data->mlx_win, tab[0], (screen_y + data->top), 0x00FFCB0D);
+// 	tab[0]++;
+// }
+// while (tab[1] < (screen_y + data->top))
+// {
+// 	mlx_pixel_put(data->mlx_ptr, data->mlx_win, (screen_x + data->left), tab[1], 0x00FFCB0D);
+// 	tab[1]++;
+// }
+
+//mlx_pixel_put(data->mlx_ptr, data->mlx_win, screen_x, screen_y, 0x00FFCB0D);
