@@ -6,18 +6,27 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 14:10:35 by gbourson          #+#    #+#             */
-/*   Updated: 2016/08/27 14:58:14 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/08/31 19:42:16 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-void ft_draw_line(t_env *data, int screen_x_next, double cursor)
+void ft_draw_line(t_env *data, int *screen_xy, int *screen_xy_next, double *tab)
 {
-	while (cursor < screen_x_next)
-	{
-		mlx_pixel_put(data->mlx_ptr, data->mlx_win, cursor, cursor/2, 0x00FFCB0D);
-		cursor++;
+	float	dl;
+	float	dh;
+	float	c;
+	float	m;
+
+	dl = fabs((float)screen_xy[0] - (float)screen_xy_next[0]);
+	dh = fabs((float)screen_xy[1] - (float)screen_xy_next[1]);
+	c = -1.0;
+	m = dh > dl ? dh : dl;
+	while (++c <= m) {
+		tab[0] = screen_xy[0] + data->left + (c * dl) / m;
+		tab[1] = screen_xy[1] + data->top + (c * dh) / m;
+		mlx_pixel_put(data->mlx_ptr, data->mlx_win, tab[0], tab[1], 0x00E80C7A);
 	}
 }
 
@@ -59,11 +68,16 @@ void ft_draw_pixel(t_env *data)
 {
 	t_list	*tmp_list;
 	t_list	*tmp_list_next;
+	t_point *point;
 	int		screen_xy[2];
 	int		screen_xy_next[2];
+	float	dl;
+	float	dh;
+	//float	am;
 	double	tab[2];
 
 	tmp_list = NULL;
+	point = NULL;
 	ft_init_tab_int(screen_xy, 2);
 	ft_init_tab_int(screen_xy_next, 2);
 	ft_init_tab_int((int *)tab, 2);
@@ -74,36 +88,18 @@ void ft_draw_pixel(t_env *data)
 		tmp_list = data->map->content;
 		while (tmp_list)
 		{
+			point = (t_point *)tmp_list->content;
 			if (tmp_list->next)
 				tmp_list_next = tmp_list->next;
 			ft_cal_iso(tmp_list, screen_xy);
 			ft_cal_iso(tmp_list_next, screen_xy_next);
-			ft_tab_coord(tab, (screen_xy[0] + data->left - data->case_width), (screen_xy[1] + data->top + data->case_height));
-			//ft_draw_line(double *tab, )
-			while (++tab[0] < (screen_xy[0] + data->left) && data->map->next)
-			{
-				mlx_pixel_put(data->mlx_ptr, data->mlx_win, tab[0], tab[1], 0x00FFCB0D);
-				//tab[0]++;
-				tab[1] -= 0.5;
-			}
-			ft_tab_coord(tab, (screen_xy[0] + data->left), (screen_xy[1] + data->top));
-			while (tab[1] < (screen_xy_next[1] + data->top))
-			{
-				mlx_pixel_put(data->mlx_ptr, data->mlx_win, tab[0], tab[1], 0x00FFCB0D);
-				tab[0]++;
-				tab[1] += 0.5;
-			}
-			// if (!tmp_list->next)
-			// {
-			// 	// while (++tab[0] < (screen_xy[0] + data->left))
-			// 	// {
-			// 	// 	mlx_pixel_put(data->mlx_ptr, data->mlx_win, tab[0], tab[1], 0x00E80C7A);
-			// 	// 	//tab[0]--;
-			// 	// 	tab[1] -= 0.5;
-			// 	// }
-			// }
-			mlx_pixel_put(data->mlx_ptr, data->mlx_win, screen_xy[0] + data->left, screen_xy[1] + data->top, 0x00FFCB0D);
-			//ft_draw_line(data, screen_x + data->left, screen_x_next + data->left);
+			ft_putchar(' ');
+			tab[0] = ((point->x - point->y) * SIZE_CASE) + point->z;
+			tab[1] = (((point->x + point->y) * SIZE_CASE)/2) + point->z;
+			dl = fabs((float)screen_xy[0] - (float)screen_xy_next[0]);
+			dh = fabs((float)screen_xy[1] - (float)screen_xy_next[1]);
+			mlx_pixel_put(data->mlx_ptr, data->mlx_win, tab[0] + data->left, tab[1] + data->top, 0x00FFCB0D);
+			ft_draw_line(data, screen_xy, screen_xy_next, tab);
 			tmp_list = tmp_list->next;
 		}
 		tmp_list = NULL;

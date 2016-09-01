@@ -186,3 +186,35 @@ void ft_print_list(t_list **map)
 // }
 
 //mlx_pixel_put(data->mlx_ptr, data->mlx_win, screen_x, screen_y, 0x00FFCB0D);
+
+
+// ft_cal_iso(tmp_list, screen_xy);
+// ft_cal_iso(tmp_list_next, screen_xy_next);
+// ft_draw_line(data, screen_xy, screen_xy_next, tab);
+//ft_tab_coord(tab, (screen_xy[0] + data->left), (screen_xy[1] + data->top));
+
+//ft_draw_line(double *tab, )
+// while ((++tab[0]) < (screen_xy[0] + data->left) && data->map->next)
+// {
+// 	mlx_pixel_put(data->mlx_ptr, data->mlx_win, tab[0], tab[1], 0x00FFCB0D);
+// 	tab[1] -= 0.5;
+// }
+// ft_tab_coord(tab, (screen_xy[0] + data->left), (screen_xy[1] + data->top));
+// while (tab[1] < (screen_xy_next[1] + data->top))
+// {
+// 	mlx_pixel_put(data->mlx_ptr, data->mlx_win, tab[0], tab[1], 0x00E80C7A);
+// 	tab[0]++;
+// 	tab[1] += 0.5;
+// }
+
+// if (!tmp_list->next)
+// {
+// 	// while (++tab[0] < (screen_xy[0] + data->left))
+// 	// {
+// 	// 	mlx_pixel_put(data->mlx_ptr, data->mlx_win, tab[0], tab[1], 0x00E80C7A);
+// 	// 	//tab[0]--;
+// 	// 	tab[1] -= 0.5;
+// 	// }
+// }
+//mlx_pixel_put(data->mlx_ptr, data->mlx_win, screen_xy[0] + data->left, screen_xy[1] + data->top, 0x00FFCB0D);
+//ft_draw_line(data, screen_x + data->left, screen_x_next + data->left);
