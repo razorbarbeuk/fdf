@@ -6,105 +6,19 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 14:10:35 by gbourson          #+#    #+#             */
-/*   Updated: 2016/08/31 19:42:16 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/09/09 12:50:53 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-void ft_draw_line(t_env *data, int *screen_xy, int *screen_xy_next, double *tab)
+int ft_img_init(t_env *data)
 {
-	float	dl;
-	float	dh;
-	float	c;
-	float	m;
-
-	dl = fabs((float)screen_xy[0] - (float)screen_xy_next[0]);
-	dh = fabs((float)screen_xy[1] - (float)screen_xy_next[1]);
-	c = -1.0;
-	m = dh > dl ? dh : dl;
-	while (++c <= m) {
-		tab[0] = screen_xy[0] + data->left + (c * dl) / m;
-		tab[1] = screen_xy[1] + data->top + (c * dh) / m;
-		mlx_pixel_put(data->mlx_ptr, data->mlx_win, tab[0], tab[1], 0x00E80C7A);
-	}
-}
-
-void ft_cal_iso(t_list *tmp_list, int *screen_xy)
-{
-	ft_elem_num(tmp_list, &screen_xy[0], 1);
-	ft_elem_num(tmp_list, &screen_xy[1], 2);
-}
-
-void ft_tab_coord(double *tab, int cal_x, int cal_y)
-{
-	tab[0] = cal_x;
-	tab[1] = cal_y;
-}
-
-void ft_cal_dist_case(t_env *data)
-{
-	t_list	*tmp_list;
-	t_list	*tmp_list_next;
-	int		screen_xy[2];
-	int		screen_xy_next[2];
-
-	ft_init_tab_int(screen_xy, 2);
-	ft_init_tab_int(screen_xy_next, 2);
-	tmp_list = NULL;
-	tmp_list_next = NULL;
-	if (data->map)
-	{
-		tmp_list = data->map->content;
-		tmp_list_next = tmp_list->next;
-		ft_cal_iso(tmp_list, screen_xy);
-		ft_cal_iso(tmp_list_next, screen_xy_next);
-		data->case_width = ((screen_xy_next[0]) - (screen_xy[0]));
-		data->case_height = ((screen_xy_next[1]) - (screen_xy[1]));
-	}
-}
-
-void ft_draw_pixel(t_env *data)
-{
-	t_list	*tmp_list;
-	t_list	*tmp_list_next;
-	t_point *point;
-	int		screen_xy[2];
-	int		screen_xy_next[2];
-	float	dl;
-	float	dh;
-	//float	am;
-	double	tab[2];
-
-	tmp_list = NULL;
-	point = NULL;
-	ft_init_tab_int(screen_xy, 2);
-	ft_init_tab_int(screen_xy_next, 2);
-	ft_init_tab_int((int *)tab, 2);
-	ft_center_map(data->map, &data->top, &data->left);
-	ft_cal_dist_case(data);
-	while (data->map)
-	{
-		tmp_list = data->map->content;
-		while (tmp_list)
-		{
-			point = (t_point *)tmp_list->content;
-			if (tmp_list->next)
-				tmp_list_next = tmp_list->next;
-			ft_cal_iso(tmp_list, screen_xy);
-			ft_cal_iso(tmp_list_next, screen_xy_next);
-			ft_putchar(' ');
-			tab[0] = ((point->x - point->y) * SIZE_CASE) + point->z;
-			tab[1] = (((point->x + point->y) * SIZE_CASE)/2) + point->z;
-			dl = fabs((float)screen_xy[0] - (float)screen_xy_next[0]);
-			dh = fabs((float)screen_xy[1] - (float)screen_xy_next[1]);
-			mlx_pixel_put(data->mlx_ptr, data->mlx_win, tab[0] + data->left, tab[1] + data->top, 0x00FFCB0D);
-			ft_draw_line(data, screen_xy, screen_xy_next, tab);
-			tmp_list = tmp_list->next;
-		}
-		tmp_list = NULL;
-		data->map = data->map->next;
-	}
+	if ((data->img.adress = mlx_new_image(data->mlx_ptr, WIN_W, WIN_H)) == NULL)
+		return (0);
+	if ((data->img.img = mlx_get_data_addr(data->img.adress, &data->img.bpp, &data->img.size_line, &data->img.endian)) == NULL)
+		return (0);
+	return (1);
 }
 
 int ft_mlx_init(t_env *data)
@@ -140,8 +54,13 @@ int main(int ac, char **av, char **env)
 		//ft_print_list(&data.map);
 		if (!ft_mlx_init(&data))
 			return (0);
-		ft_draw_pixel(&data);
-	    mlx_loop(data.mlx_ptr);
+		if (!ft_img_init(&data))
+		{
+			print_err("Error img");
+			return (0);
+		}
+		ft_draw(&data);
+		mlx_loop(data.mlx_ptr);
 	}
 	else
 		print_err("Env is empty");

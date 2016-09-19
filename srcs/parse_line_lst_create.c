@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_line.c                                       :+:      :+:    :+:   */
+/*   parse_line_lst_create.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/27 14:08:54 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/08/27 14:11:56 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/09/07 17:40:14 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static int ft_parse_line(char *line, int *count_line, t_list **list_line)
 	tmp = NULL;
 	tmp = *list_line;
 	point = NULL;
-	tmp_read = ft_strsplit(line, ' ');
 	i = 0;
+	tmp_read = ft_strsplit(line, ' ');
 	while (tmp_read[i])
 	{
 		point = (t_point *)malloc(sizeof(t_point));

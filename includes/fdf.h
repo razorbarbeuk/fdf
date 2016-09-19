@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2016/08/31 12:20:25 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/09/09 11:58:48 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,15 @@
 # define WIN_H 600
 # define SIZE_CASE 24
 
+typedef struct		s_img
+{
+	void			*adress;
+	char			*img;
+	int				bpp;
+	int				size_line;
+	int				endian;
+}					t_img;
+
 typedef struct		s_point
 {
 	int				x;
@@ -49,6 +58,7 @@ typedef struct		s_env
 	int				left;
 	int				case_width;
 	int				case_height;
+	t_img			img;
 	t_list			*list_line;
 	t_list			*map;
 }					t_env;
@@ -63,6 +73,14 @@ void	ft_elem_num(t_list *elem, int *num, int opt);
 
 /*err*/
 void	print_err(char *str);
+
+/*draw*/
+void	ft_draw(t_env *data);
+void	ft_draw_line(t_env *data, int *screen_xy, int *screen_xy_next);
+
+/*free*/
+void	del_elem_map(void *content, size_t size);
+void	del_elem(void *content, size_t size);
 
 /*utils*/
 void ft_init_tab_int(int *tab, size_t c);

@@ -218,3 +218,37 @@ void ft_print_list(t_list **map)
 // }
 //mlx_pixel_put(data->mlx_ptr, data->mlx_win, screen_xy[0] + data->left, screen_xy[1] + data->top, 0x00FFCB0D);
 //ft_draw_line(data, screen_x + data->left, screen_x_next + data->left);
+
+// screen_xy_next[0] = screen_xy[0] - SIZE_CASE + point->z;
+// screen_xy_next[1] = (screen_xy[1] + SIZE_CASE/2) + point->z;
+
+// dl = screen_xy_next[0] - screen_xy[0];
+// dh = screen_xy_next[1] - screen_xy[1];
+// screen_xy_next[0] = (screen_xy[0] - dl);
+// screen_xy_next[1] = (screen_xy[1] + dh);
+
+
+	//screen_xy_next[0] = screen_xy[0] - dl;
+	// screen_xy_next[1] = screen_xy[1] + dh;
+	// dh = (float)screen_xy_next[1] - (float)screen_xy[1];
+	// ft_putnbr(i);
+	// ft_putchar(':');
+	// ft_putnbr(screen_xy_next[1]);
+	// ft_putchar(' ');
+	// while (++i <= screen_xy_next[1])
+	// 	mlx_pixel_put(data->mlx_ptr, data->mlx_win, (screen_xy[0] + (dl * (i - screen_xy[1])) / dh) + data->left, i + data->top, 0x00FFCB0D);
+
+	// void	ft_elem_num(t_list *elem, int *num, int opt)
+	// {
+	// 	t_point	*point;
+	//
+	// 	point = NULL;
+	// 	point = (t_point *)elem->content;
+	// 	if (!elem->next && !opt)
+	// 		(*num) = (((point->x - point->y) * SIZE_CASE));
+	// 	if (opt == 1)
+	// 		(*num) = (((point->x - point->y) * SIZE_CASE));
+	// 	if (opt == 2)
+	// 		(*num) = (((point->x + point->y) * SIZE_CASE)/2);
+	// 	return ;
+	// }

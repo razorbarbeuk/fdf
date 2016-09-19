@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/18 11:46:07 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/08/31 12:20:35 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/09/05 21:05:08 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,6 @@ void	ft_lstadd_back(t_list **alst, t_list *new)
 	}
 }
 
-// void	ft_elem_num(t_list *elem, int *num, int opt)
-// {
-// 	t_point	*point;
-//
-// 	point = NULL;
-// 	point = (t_point *)elem->content;
-// 	if (!elem->next && !opt)
-// 		(*num) = (((point->x - point->y) * SIZE_CASE));
-// 	if (opt == 1)
-// 		(*num) = (((point->x - point->y) * SIZE_CASE));
-// 	if (opt == 2)
-// 		(*num) = (((point->x + point->y) * SIZE_CASE)/2);
-// 	return ;
-// }
-
 void	ft_elem_num(t_list *elem, int *num, int opt)
 {
 	t_point	*point;
@@ -52,8 +37,8 @@ void	ft_elem_num(t_list *elem, int *num, int opt)
 	point = (t_point *)elem->content;
 	iso_x = 0;
 	iso_y = 0;
-	iso_x = (point->x) * SIZE_CASE;
-	iso_y = (point->y) * SIZE_CASE;
+	iso_x = (point->x) * SIZE_CASE - point->z;
+	iso_y = (point->y) * SIZE_CASE - point->z;
 	if (!elem->next && !opt)
 		(*num) = ((iso_x - iso_y));
 	if (opt == 1)
