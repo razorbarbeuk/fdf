@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line_pixel.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
+/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/08 10:22:34 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/09/19 19:44:49 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/09/20 14:13:36 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void ft_draw_pixel(t_env *data, int x, int y)
 	// ft_putnbr(pos);
 	// ft_putchar(' ');
 	data->img.img[pos] = color;
-	ft_putnbr(color);
-	ft_putchar('\n');
+	// ft_putnbr(color);
+	// ft_putchar('\n');
 	data->img.img[pos + 1] = color >> 8;
-	ft_putnbr(color >> 8);
-	ft_putchar('\n');
+	// ft_putnbr(color >> 8);
+	// ft_putchar('\n');
 	data->img.img[pos + 2] = color >> 16;
-	ft_putnbr(color >> 16);
-	ft_putchar('\n');
+	// ft_putnbr(color >> 16);
+	// ft_putchar('\n');
 }
 
 void ft_draw_line(t_env *data, int *screen_xy, int *screen_xy_next)
@@ -50,8 +50,6 @@ void ft_draw_line(t_env *data, int *screen_xy, int *screen_xy_next)
 		while (++i <= screen_xy_next[0])
 			ft_draw_pixel(data, i + data->left, (screen_xy[1] + (disth * (i - screen_xy[0])) / distl) + data->top);
 			//mlx_pixel_put(data->mlx_ptr, data->mlx_win, i + data->left, (screen_xy[1] + (disth * (i - screen_xy[0])) / distl) + data->top, 0x00E80C7A);
-
-
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2016/09/19 19:45:57 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/09/20 14:32:44 by gbourson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@
 
 # define OPT "i"
 # define ERROR_OPT() ft_putendl("Erreur option");
-# define BUILD_FIND 0
-# define BUILD_EXE 1
 # define RED "\e[31m"
 # define ORANGE "\033[38;2;255;189;0m"
 # define WIN_W 800
 # define WIN_H 600
+# define DEFAULT_COLOR_1 0xFF0000
+# define DEFAULT_COLOR_2 0xFFFFFF
 # define SIZE_CASE 24
 
 typedef struct		s_img
@@ -65,7 +65,7 @@ typedef struct		s_env
 	int				left;
 	int				case_width;
 	int				case_height;
-	t_color			color;
+	t_list			*color;
 	t_img			img;
 	t_list			*list_line;
 	t_list			*map;
@@ -73,7 +73,7 @@ typedef struct		s_env
 
 /*Parsing line*/
 int		ft_open_file(char *av, t_env *data);
-void	ft_parse_color(char **av);
+int		ft_parse_color(char **av, t_env *data);
 
 /*List_utils*/
 void	ft_lstadd_back(t_list **alst, t_list *new);
