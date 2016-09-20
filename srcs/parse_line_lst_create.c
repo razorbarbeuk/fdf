@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/27 14:08:54 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/09/07 17:40:14 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/09/19 19:55:40 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ int ft_open_file(char *av, t_env *data)
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);
+	close(fd);
 	return (1);
 }

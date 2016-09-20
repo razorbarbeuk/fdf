@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 14:48:45 by gbourson          #+#    #+#              #
-#    Updated: 2016/09/08 10:23:21 by RAZOR            ###   ########.fr        #
+#    Updated: 2016/09/19 19:42:31 by RAZOR            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME 		=	fdf
 LIB			=	./libft/libft.a
 SRC_NAME 	=	main.c \
 				parse_line_lst_create.c \
+				color.c \
 				list_utils.c \
 				draw.c \
 				draw_line_pixel.c \

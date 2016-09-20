@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/02 17:59:26 by gbourson          #+#    #+#             */
-/*   Updated: 2016/09/09 11:58:48 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/09/19 19:45:57 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ typedef struct		s_point
 	int				z;
 }					t_point;
 
+typedef struct		s_color
+{
+	int				r;
+	int				v;
+	int				b;
+}					t_color;
+
 typedef struct		s_env
 {
 	void			*mlx_ptr;
@@ -58,13 +65,15 @@ typedef struct		s_env
 	int				left;
 	int				case_width;
 	int				case_height;
+	t_color			color;
 	t_img			img;
 	t_list			*list_line;
 	t_list			*map;
 }					t_env;
 
 /*Parsing line*/
-int ft_open_file(char *av, t_env *data);
+int		ft_open_file(char *av, t_env *data);
+void	ft_parse_color(char **av);
 
 /*List_utils*/
 void	ft_lstadd_back(t_list **alst, t_list *new);

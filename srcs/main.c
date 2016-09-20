@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 14:10:35 by gbourson          #+#    #+#             */
-/*   Updated: 2016/09/09 12:50:53 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/09/19 19:58:01 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ int main(int ac, char **av, char **env)
     t_env        data;
 
 	ft_init_data(&data);
-	if ((env) && (ac < 3))
+	if ((env) && (ac < 5))
 	{
 		ft_open_file(av[1], &data);
-		//ft_print_list(&data.map);
+		ft_parse_color(&av[2], &data);
 		if (!ft_mlx_init(&data))
 			return (0);
 		if (!ft_img_init(&data))

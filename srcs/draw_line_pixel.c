@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/08 10:22:34 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/09/14 18:59:33 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/09/19 19:44:49 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void ft_draw_pixel(t_env *data, int x, int y)
 	int pos;
 	int color;
 
-	color = 0x0D6386;
+	color = 0xFFFFFF;
 	// ft_putnbr(x);
 	// ft_putchar(' ');
 	// ft_putnbr(data->img.bpp);
