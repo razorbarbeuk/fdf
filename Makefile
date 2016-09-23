@@ -6,13 +6,14 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 14:48:45 by gbourson          #+#    #+#              #
-#    Updated: 2016/09/20 13:52:55 by gbourson         ###   ########.fr        #
+#    Updated: 2016/09/22 12:02:09 by RAZOR            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		=	fdf
 LIB			=	./libft/libft.a
 SRC_NAME 	=	main.c \
+				init.c \
 				parse_line_lst_create.c \
 				color.c \
 				list_utils.c \
@@ -35,8 +36,8 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	@make -C libft
-	# @gcc $(CFLAGS) $(OBJ) $(LIB) $(INCLUDES) -o $(NAME) -L/usr/X11/lib -lX11 -lmlx -lXext -framework OpenGL -framework AppKit -lm
-	@gcc $(CFLAGS) $(OBJ) $(LIB) $(INCLUDES) -o $(NAME) -lmlx -framework OpenGL -framework AppKit
+	@gcc $(CFLAGS) $(OBJ) $(LIB) $(INCLUDES) -o $(NAME) -L/usr/X11/lib -lX11 -lmlx -lXext -framework OpenGL -framework AppKit -lm
+	# @gcc $(CFLAGS) $(OBJ) $(LIB) $(INCLUDES) -o $(NAME) -lmlx -framework OpenGL -framework AppKit
 	@echo "Tu as compilé"
 
 clean :

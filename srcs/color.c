@@ -3,57 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
+/*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 19:38:34 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/09/21 16:49:51 by gbourson         ###   ########.fr       */
+/*   Updated: 2016/09/23 10:39:15 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-static int ft_convert_Hex(char *av)
+int get_color_value(t_env *data, int tab, int steps, char c)
 {
-	int i;
-	int hex;
-	int n;
+	t_color *col;
+	t_list	*tmp;
+	int		i;
 
 	i = 0;
-	n = 0;
-	if (av[i] == '0')
+	col = NULL;
+	tmp = NULL;
+	tmp = data->color;
+	while (i < steps)
 	{
-		++i;
-		if (av[i] == 'x' || av[i] == 'X')
-			++i;
-		else
-			return (-1);
-		while (av[i])
-		{
-			if (av[i] >= '0' && av[i] <= '9')
-				hex = av[i] - '0';
-			if (av[i] >= 'a' && av[i] <= 'f')
-				hex = av[i] - 'a' + 10;
-			if (av[i] >= 'A' && av[i] <= 'F')
-				hex = av[i] - 'A' + 10;
-			n = 16 * n + hex;
-			i++;
-		}
-		return (n);
+		col = ((t_color *)tmp->content);
+		if (c == 'R')
+			return ((col->r + (tab * i)));
+		if (c == 'V')
+			return ((col->v + (tab * i)));
+		if (c == 'B')
+			return ((col->b + (tab * i)));
+		i++;
 	}
-	return (-1);
+	return (0);
 }
 
-static void ft_init_color(t_color **color)
+void init_color_value(t_env *data, int step, int *tab)
 {
-	t_color *tmp;
+	t_color *col;
+	t_color *col_next;
+	t_list	*tmp;
 
+	col = NULL;
 	tmp = NULL;
-	tmp = *color;
-	tmp->r = 0;
-	tmp->v = 0;
-	tmp->b = 0;
-	*color = tmp;
-	tmp = NULL;
+	tmp = data->color;
+	col_next = NULL;
+	while (tmp)
+	{
+		col = ((t_color *)tmp->content);
+		if (tmp->next)
+		{
+			col_next = ((t_color *)tmp->next->content);
+			tab[0] = (col_next->r - col->r) / (step);
+			tab[1] = (col_next->v - col->v) / (step);
+			tab[2] = (col_next->b - col->b) / (step);
+		}
+		tmp = tmp->next;
+	}
+	return ;
 }
 
 static int ft_stock_color(char **av, t_env **data)
@@ -72,21 +77,12 @@ static int ft_stock_color(char **av, t_env **data)
 		if (!(color = (t_color *)malloc(sizeof(t_color))))
 			return (0);
 		ft_init_color(&color);
-		hex = ft_convert_Hex(av[i]);
-		ft_putnbr(hex);
-		ft_putchar(' ');
-		color->r = hex;
-		// ft_putnbr(color->r);
-		// ft_putchar(' ');
+		hex = ft_convert_Hex(&av[i][2]);
+		color->r = hex >> 16;
 		color->v = hex >> 8;
-		// ft_putnbr(color->v);
-		// ft_putchar(' ');
-		color->b = hex >> 16;
-		// ft_putnbr(color->b);
-		// ft_putchar('\n');
+		color->b = hex;
 		ft_lstadd_back(&tmp_color, ft_lstnew(color, sizeof(t_color)));
 		ft_memdel((void **)&color);
-		//ft_strdel(&av[i]);
 		i++;
 	}
 	((*data)->color) = tmp_color;
@@ -98,20 +94,18 @@ static int ft_stock_color(char **av, t_env **data)
 int ft_parse_color(char **av, t_env *data)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	while (av[i])
 	{
-		j = 0;
-		while (av[i][j] && av[i][0] != '0' && av[i][1] != 'x')
+		if ((av[i][0] != '0' && av[i][1] != 'x') || (av[i][0] != '0' && av[i][1] != 'X'))
+			ft_print_err("Error code Hexa");
+		else
 		{
-			if ((av[i][0] != '0' && av[i][1] != 'x') || (av[i][0] != '0' && av[i][1] != 'X'))
+			if (!ft_stock_color(&av[0], &data))
 				return (0);
-			j++;
 		}
 		i++;
 	}
-	ft_stock_color(&av[0], &data);
 	return (1);
 }

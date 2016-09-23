@@ -6,13 +6,13 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/18 15:04:50 by gbourson          #+#    #+#             */
-/*   Updated: 2016/08/27 12:32:01 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/09/22 19:11:02 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-void	print_err(char *str)
+void	ft_print_err(char *str)
 {
 	ft_putstr_fd(RED, 2);
 	ft_putstr_fd(str, 2);
