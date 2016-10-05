@@ -252,3 +252,22 @@ void ft_print_list(t_list **map)
 	// 		(*num) = (((point->x + point->y) * SIZE_CASE)/2);
 	// 	return ;
 	// }
+
+	// init_color_value(data, distl, color);
+	// i = screen_xy[0] - 1;
+	// // distl = fabs((float)distl);
+	// while (++i <= screen_xy_next[0] && ft_color_counter(&color[4], color_count))
+	// 	ft_draw_pixel(data, i + data->left, (screen_xy[1] + (disth * (i - screen_xy[0])) / distl) + data->top, color);
+// if (distl < 0)
+// {
+// 	init_color_value(data, distl, color);
+// 	i = screen_xy_next[0] - 1;
+// 	distl = fabs((float)distl);
+// 	while (++i <= screen_xy[0] && ft_color_counter(&color[4], color_count))
+// 		ft_draw_pixel(data, i + data->left, (screen_xy_next[1] + (disth * (i - screen_xy_next[0])) / distl) + data->top, color);
+// }
+// init_color_value(data, disth, color);
+// i = screen_xy_next[1] - 1;
+// disth = fabs((float)disth);
+// while (++i <= screen_xy[1] && ft_color_counter(&color[4], color_count))
+// 	ft_draw_pixel(data, (screen_xy_next[0] + (distl * (i - screen_xy_next[1])) / disth) + data->left, i + data->top, color);

@@ -6,7 +6,7 @@
 /*   By: RAZOR <RAZOR@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 19:38:34 by RAZOR             #+#    #+#             */
-/*   Updated: 2016/09/23 10:39:15 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/10/03 16:59:34 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void init_color_value(t_env *data, int step, int *tab)
 	tmp = NULL;
 	tmp = data->color;
 	col_next = NULL;
-	while (tmp)
+	while (tmp && step)
 	{
 		col = ((t_color *)tmp->content);
 		if (tmp->next)

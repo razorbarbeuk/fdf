@@ -6,7 +6,7 @@
 #    By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 14:48:45 by gbourson          #+#    #+#              #
-#    Updated: 2016/09/22 12:02:09 by RAZOR            ###   ########.fr        #
+#    Updated: 2016/10/04 17:40:41 by RAZOR            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRC_NAME 	=	main.c \
 				init.c \
 				parse_line_lst_create.c \
 				color.c \
+				palette.c \
 				list_utils.c \
 				draw.c \
 				draw_line_pixel.c \

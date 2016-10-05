@@ -6,7 +6,7 @@
 /*   By: gbourson <gbourson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/17 14:10:35 by gbourson          #+#    #+#             */
-/*   Updated: 2016/09/22 19:12:34 by RAZOR            ###   ########.fr       */
+/*   Updated: 2016/10/05 12:48:01 by RAZOR            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,19 @@ int main(int ac, char **av, char **env)
     t_env        data;
 
 	ft_init_data(&data);
+	ft_static_select(&data, 0);
 	if ((env) && (ac < 6))
 	{
-		ft_open_file(av[1], &data);
+		if(!ft_open_file(av[1], &data))
+		{
+			ft_print_err("Error open file");
+			return (0);
+		}
+		// if (!ft_open_dir_palette(&data))
+		// {
+		// 	ft_print_err("Error open folder");
+		// 	return (0);
+		// }
 		ft_parse_color(&av[2], &data);
 		if (!ft_mlx_init(&data))
 			return (0);
